@@ -18,23 +18,29 @@
       - tzdata
     state: present
 
+- name: Download GitLab repository installation script.
+  get_url:
+    url: "{{ gitlab_repository_installation_script_url }}"
+    dest: /tmp/gitlab_install_repository.sh
+    validate_certs: "{{ gitlab_download_validate_certs }}"
+  when: gitlab_download_url | length == 0
+
+- name: Install GitLab repository.
+  command: bash /tmp/gitlab_install_repository.sh
+  register: output
+  when: gitlab_download_url | length == 0
+
 - name: Install GitLab dependencies (Debian).
   apt:
     name: gnupg2
     state: present
   when: ansible_os_family == 'Debian'
 
-- name: Download GitLab repository installation script.
-  get_url:
-    url: "{{ gitlab_repository_installation_script_url }}"
-    dest: /tmp/gitlab_install_repository.sh
-    validate_certs: "{{ gitlab_download_validate_certs }}"
-  when: not gitlab_file.stat.exists
-
-- name: Install GitLab repository.
-  command: bash /tmp/gitlab_install_repository.sh
-  register: output
-  when: not gitlab_file.stat.exists
+- name: Install GitLab-ce
+  yum:
+    name: "{{ gitlab_download_url }}"
+    state: present
+  when: gitlab_download_url | length > 0
 
 - name: Define the Gitlab package name.
   set_fact:
