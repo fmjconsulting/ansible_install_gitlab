@@ -66,3 +66,6 @@
 
 - name: Stop and restart gitlab-runsvdir
   shell: systemctl restart gitlab-runsvdir
+
+- name: Disable registration tab
+  shell: "gitlab-rails runner 'ApplicationSetting.last.update_attributes(signup_enabled: false)'"

@@ -16,7 +16,7 @@ gitlab_workhorse['listen_addr'] = "localhost:8787"
 
 
 gitlab_rails['initial_root_password'] = "1n1714lp455w0rd"
-gitlab_rails['backup_path']= "{{ gitlab_data }}"
+gitlab_rails['backup_path']= "{{ gitlab_backup_dir }}"
 
 # gitlab.yml configuration
 gitlab_rails['time_zone'] = "{{ gitlab_time_zone }}"
