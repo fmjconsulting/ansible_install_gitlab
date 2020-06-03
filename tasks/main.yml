@@ -69,3 +69,6 @@
 
 - name: Disable registration tab
   shell: "gitlab-rails runner 'ApplicationSetting.last.update_attributes(signup_enabled: false)'"
+
+- name: Disable local requests protection
+  shell: "gitlab-rails runner 'ApplicationSetting.last.update_attributes(allow_local_requests_from_web_hooks_and_services: true)'"
