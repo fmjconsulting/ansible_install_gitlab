@@ -7,6 +7,7 @@ gitlab_version: ''
 gitlab_backup_path: "/var/opt/gitlab/backups"
 gitlab_config_template: "gitlab.rb.j2"
 gitlab_download_url: ""
+gitlab_root_password: ""
 
 httpd_port: 8282
 

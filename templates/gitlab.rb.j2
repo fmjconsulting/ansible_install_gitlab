@@ -16,7 +16,7 @@ gitlab_workhorse['listen_network'] = "tcp"
 gitlab_workhorse['listen_addr'] = "localhost:8787"
 
 
-gitlab_rails['initial_root_password'] = "1n1714lp455w0rd"
+gitlab_rails['initial_root_password'] = "{{ gitlab_root_password }}"
 gitlab_rails['backup_path']= "{{ gitlab_backup_dir }}"
 
 # gitlab.yml configuration
